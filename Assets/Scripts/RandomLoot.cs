@@ -37,11 +37,11 @@ public class RandomLoot : MonoBehaviour
 	void OnGUI()
 	{
 		if(showGui){
-			GUI.BeginGroup(new Rect(Screen.width-200,Screen.height/2-50,200,100));
+			GUI.BeginGroup(new Rect(Screen.width - 200, Screen.height - 100, 200, 100));
 
-			GUI.Box(new Rect(0,0,200,100), "Loot");
-			GUI.Label(new Rect(0,25,200,25), chosenLoot);
-			if(GUI.Button(new Rect(0,50,200,50),"Take")){
+			GUI.Box(new Rect(0, 0, 200, 100), "Loot");
+			GUI.Label(new Rect(0, 25, 200, 25), chosenLoot);
+			if(GUI.Button(new Rect(0, 50, 200, 50), "Take")){
 				TakeLoot(GameObject.FindGameObjectWithTag("MainCamera"));
 			}
 

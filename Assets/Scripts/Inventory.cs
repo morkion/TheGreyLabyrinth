@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
 
 	void OnGUI()
 	{
-		GUI.BeginGroup(new Rect(Screen.width - 200, 0, 200, 25 * items.Length));
+		GUI.BeginGroup(new Rect(Screen.width - 200, 0, 200, 25 + 25 * items.Length));
 		GUI.Box(new Rect(0, 0, 200, Screen.height), "Inventory");
 		for(int i = 0; i < items.Length; i++){
 			GUI.Label(new Rect(0, 25 + (25 * i), 100, 25), items[i]);
