@@ -6,6 +6,7 @@ public class GenerateLevel : MonoBehaviour
 {
 
 	public GameObject cube;
+	public GameObject lootObj;
 	GameObject clone;
 
 	public int size = 256;
@@ -28,22 +29,23 @@ public class GenerateLevel : MonoBehaviour
 
 	public int GetCube(float x, float z)
 	{
-		return cubes[Mathf.RoundToInt(x),Mathf.RoundToInt(z)];
+		return cubes[Mathf.RoundToInt(x), Mathf.RoundToInt(z)];
 	}
 
 	public void SpawnCube(float x, float z)
 	{
 		if(!cubeSpawned[Mathf.RoundToInt(x),Mathf.RoundToInt(z)]){
-			clone = Instantiate(cube,new Vector3(x,cubes[Mathf.RoundToInt(x),Mathf.RoundToInt(z)],z),Quaternion.identity) as GameObject;
-			cubeSpawned[Mathf.RoundToInt(x),Mathf.RoundToInt(z)] = true;
+			clone = Instantiate(cube, new Vector3(x, cubes[Mathf.RoundToInt(x), Mathf.RoundToInt(z)], z), Quaternion.identity) as GameObject;
+			if(Random.Range(0, 5) == 0 && cubes[Mathf.RoundToInt(x), Mathf.RoundToInt(z)] == 0) Instantiate(lootObj, new Vector3(x, 1, z), Quaternion.identity);
+			cubeSpawned[Mathf.RoundToInt(x), Mathf.RoundToInt(z)] = true;
 		}
 	}
 
 	public void NoExit(float curX, float curZ){
-		if(!cubeSpawned[Mathf.RoundToInt(curX)-1,Mathf.RoundToInt(curZ)]) cubes[Mathf.RoundToInt(curX)-1,Mathf.RoundToInt(curZ)] = Random.Range(0,2);
-		if(!cubeSpawned[Mathf.RoundToInt(curX)+1,Mathf.RoundToInt(curZ)]) cubes[Mathf.RoundToInt(curX)+1,Mathf.RoundToInt(curZ)] = Random.Range(0,2);
-		if(!cubeSpawned[Mathf.RoundToInt(curX),Mathf.RoundToInt(curZ)-1]) cubes[Mathf.RoundToInt(curX),Mathf.RoundToInt(curZ)-1] = Random.Range(0,2);
-		if(!cubeSpawned[Mathf.RoundToInt(curX),Mathf.RoundToInt(curZ)+1]) cubes[Mathf.RoundToInt(curX),Mathf.RoundToInt(curZ)+1] = Random.Range(0,2);
+		if(!cubeSpawned[Mathf.RoundToInt(curX) - 1, Mathf.RoundToInt(curZ)]) cubes[Mathf.RoundToInt(curX) - 1, Mathf.RoundToInt(curZ)] = Random.Range(0, 2);
+		if(!cubeSpawned[Mathf.RoundToInt(curX) + 1, Mathf.RoundToInt(curZ)]) cubes[Mathf.RoundToInt(curX) + 1, Mathf.RoundToInt(curZ)] = Random.Range(0, 2);
+		if(!cubeSpawned[Mathf.RoundToInt(curX), Mathf.RoundToInt(curZ) - 1]) cubes[Mathf.RoundToInt(curX), Mathf.RoundToInt(curZ) - 1] = Random.Range(0, 2);
+		if(!cubeSpawned[Mathf.RoundToInt(curX), Mathf.RoundToInt(curZ) + 1]) cubes[Mathf.RoundToInt(curX), Mathf.RoundToInt(curZ) + 1] = Random.Range(0, 2);
 	}
 
 
