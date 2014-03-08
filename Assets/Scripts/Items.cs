@@ -38,7 +38,7 @@ public class Items : MonoBehaviour
 		case "Leather Armour":
 		case "Chainmail Armour":
 		case "Steel Plate Armour":
-		case "Dwarven Steel Plate Armor":
+		case "Dwarven Steel Plate Armour":
 			return "Armour";
 			break;
 		}

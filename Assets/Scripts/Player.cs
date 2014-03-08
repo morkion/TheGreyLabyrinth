@@ -26,25 +26,29 @@ public class Player : MonoBehaviour
 		if(canMove){
 			if(checks >= 3){ 
 				gen.NoExit(pos.x, pos.z);
-			}else{
-				if(checkUp){ 
-					MoveUp();
-				}
-				gen.SpawnCube(pos.x, pos.z + 1);
-				if(checkDown){
-					MoveDown();
-				}
-				gen.SpawnCube(pos.x, pos.z - 1);
-				if(checkLeft){
-					MoveLeft();
-				}
-				gen.SpawnCube(pos.x - 1, pos.z);
-				if(checkRight){ 
-					MoveRight();
-				}
-				gen.SpawnCube(pos.x + 1, pos.z);
 			}
+			if(checks < 4 ) MovementAndSpawning();
 		}
+	}
+
+	void MovementAndSpawning()
+	{
+		if(checkUp){ 
+			MoveUp();
+		}
+		gen.SpawnCube(pos.x, pos.z + 1);
+		if(checkDown){
+			MoveDown();
+		}
+		gen.SpawnCube(pos.x, pos.z - 1);
+		if(checkLeft){
+			MoveLeft();
+		}
+		gen.SpawnCube(pos.x - 1, pos.z);
+		if(checkRight){ 
+			MoveRight();
+		}
+		gen.SpawnCube(pos.x + 1, pos.z);
 	}
 
 	void MoveUp()
