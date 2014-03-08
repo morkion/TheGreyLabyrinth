@@ -7,8 +7,11 @@ public class Enemy : MonoBehaviour
 	public float rndAttackModifier = 0.1f;
 	public float startingHealth = 2;
 	public float rndHealthModifier = 0.1f;
+	public float startingDefence = 0.5f;
+	public float rndDefenceModifier = 0.1f;
 	float attack;
 	float health;
+	float defence;
 
 	Stats stats;
 	Player player;
@@ -22,8 +25,10 @@ public class Enemy : MonoBehaviour
 		player = cam.GetComponent<Player>();
 		startingAttack += Random.Range(-rndAttackModifier, rndAttackModifier);
 		startingHealth += Random.Range(-rndHealthModifier, rndHealthModifier);
+		startingDefence += Random.Range(-rndDefenceModifier, rndDefenceModifier);
 		attack = startingAttack;
 		health = startingHealth;
+		defence = startingDefence;
 	}
 
 	void Update()
@@ -54,14 +59,23 @@ public class Enemy : MonoBehaviour
 
 			GUI.Box(new Rect(0, 0, 400, 200), "Encounter");
 			GUI.HorizontalScrollbar(new Rect(0, 25, 200, 25), 0, startingHealth, 0, health);
-			GUI.Label(new Rect(200, 25, 200, 25)," Health");
-			GUI.Label(new Rect(0, 50, 400, 25), "Att: " + attack);
+			GUI.Label(new Rect(200, 25, 200, 25)," " + health + " Health");
+			GUI.Label(new Rect(0, 50, 400, 25), "Att: " + attack + " Def:" + defence);
 			if(GUI.Button(new Rect(0, 100, 400, 50),"Attack")){
-				health -= stats.GetAttack();
-				stats.ModifyHealth(-attack);
+				float mobDmg = stats.GetAttack()-defence;
+				if(mobDmg<0) mobDmg = 0;
+				health -= mobDmg;
+
+				float plrDmg = attack - stats.GetDefence();
+				if(plrDmg<0) plrDmg = 0;
+				stats.ModifyHealth(-plrDmg);
 			}
 			if(GUI.Button(new Rect(0, 150, 400, 50), "Flee")){
-				if(player.Flee() == false) stats.ModifyHealth(-attack);
+				if(player.Flee() == false){ 
+					float plrDmg = attack - stats.GetDefence();
+					if(plrDmg<0) plrDmg = 0;
+					stats.ModifyHealth(-plrDmg);
+				}
 			}
 
 			GUI.EndGroup();

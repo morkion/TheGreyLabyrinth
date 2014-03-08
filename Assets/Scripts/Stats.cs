@@ -5,15 +5,16 @@ public class Stats : MonoBehaviour
 {
 	float attack = 0;
 	float health = 5;
+	float defence = 0;
 
 	void OnGUI()
 	{
 		GUI.BeginGroup(new Rect(0, Screen.height - 50, 200, 50));
 
 		GUI.Box(new Rect(0, 0, 200, 50), "");
-		GUI.HorizontalScrollbar(new Rect(0, 0, 100, 25),0,5,0,health);
-		GUI.Label(new Rect(100, 0, 100, 25), "Health");
-		GUI.Label(new Rect(0, 25, 200, 25), "Att: " + attack);
+		GUI.HorizontalScrollbar(new Rect(0, 0, 100, 25), 0, 5, 0, health);
+		GUI.Label(new Rect(100, 0, 100, 25), " " + health + " Health");
+		GUI.Label(new Rect(0, 25, 200, 25), "Att: " + attack + " Def: " + defence);
 
 		GUI.EndGroup();
 	}
@@ -21,6 +22,11 @@ public class Stats : MonoBehaviour
 	public void SetAttack(float newAtt)
 	{
 		attack = newAtt;
+	}
+
+	public void SetDefence(float newDef)
+	{
+		defence = newDef;
 	}
 
 	public void ModifyHealth(float modifier)
@@ -31,6 +37,11 @@ public class Stats : MonoBehaviour
 	public float GetAttack()
 	{
 		return attack;
+	}
+
+	public float GetDefence()
+	{
+		return defence;
 	}
 
 	void Update()
