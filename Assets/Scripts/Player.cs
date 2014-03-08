@@ -5,7 +5,11 @@ public class Player : MonoBehaviour
 {
 	Vector3 pos;
 	GenerateLevel gen;
-
+	bool checkUp = false;
+	bool checkDown = false;
+	bool checkLeft = false;
+	bool checkRight = false;
+	public bool canMove = true;
 	void Start()
 	{
 		gen = GetComponent<GenerateLevel>();
@@ -14,58 +18,102 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		pos = transform.position;
-		bool checkUp = gen.GetCube(pos.x, pos.z + 1) == 0;
-		bool checkDown = gen.GetCube(pos.x, pos.z - 1) == 0;
-		bool checkLeft = gen.GetCube(pos.x - 1, pos.z) == 0;
-		bool checkRight = gen.GetCube(pos.x + 1, pos.z) == 0;
+		checkUp = gen.GetCube(pos.x, pos.z + 1) == 0;
+		checkDown = gen.GetCube(pos.x, pos.z - 1) == 0;
+		checkLeft = gen.GetCube(pos.x - 1, pos.z) == 0;
+		checkRight = gen.GetCube(pos.x + 1, pos.z) == 0;
 		int checks = gen.GetCube(pos.x, pos.z + 1) + gen.GetCube(pos.x, pos.z - 1) + gen.GetCube(pos.x - 1, pos.z) + gen.GetCube(pos.x + 1, pos.z);
-
-		if(checks >= 3){ 
-			gen.NoExit(pos.x, pos.z);
-		}else{
-			if(checkUp){ 
-				MoveUp();
+		if(canMove){
+			if(checks >= 3){ 
+				gen.NoExit(pos.x, pos.z);
+			}else{
+				if(checkUp){ 
+					MoveUp();
+				}
+				gen.SpawnCube(pos.x, pos.z + 1);
+				if(checkDown){
+					MoveDown();
+				}
+				gen.SpawnCube(pos.x, pos.z - 1);
+				if(checkLeft){
+					MoveLeft();
+				}
+				gen.SpawnCube(pos.x - 1, pos.z);
+				if(checkRight){ 
+					MoveRight();
+				}
+				gen.SpawnCube(pos.x + 1, pos.z);
 			}
-			gen.SpawnCube(pos.x, pos.z + 1);
-			if(checkDown){
-				MoveDown();
-			}
-			gen.SpawnCube(pos.x, pos.z - 1);
-			if(checkLeft){
-				MoveLeft();
-			}
-			gen.SpawnCube(pos.x - 1, pos.z);
-			if(checkRight){ 
-				MoveRight();
-			}
-			gen.SpawnCube(pos.x + 1, pos.z);
 		}
 	}
 
 	void MoveUp()
 	{
-		if(Input.GetKeyUp(KeyCode.UpArrow)){
+		if(Input.GetKeyUp(KeyCode.UpArrow) || !canMove){
 			transform.Translate(new Vector3(0, 0, 1), Space.World);
 		}
 	}
 	void MoveDown()
 	{
-		if(Input.GetKeyUp(KeyCode.DownArrow)){
+		if(Input.GetKeyUp(KeyCode.DownArrow) || !canMove){
 			transform.Translate(new Vector3(0, 0, -1), Space.World);
 		}
 	}
 
 	void MoveLeft()
 	{
-		if(Input.GetKeyUp(KeyCode.LeftArrow)){
+		if(Input.GetKeyUp(KeyCode.LeftArrow) || !canMove){
 			transform.Translate(new Vector3(-1, 0, 0),Space.World);
 		}
 	}
 
 	void MoveRight()
 	{
-		if(Input.GetKeyUp(KeyCode.RightArrow)){
+		if(Input.GetKeyUp(KeyCode.RightArrow) || !canMove){
 			transform.Translate(new Vector3(1, 0, 0),Space.World);
 		}
+	}
+
+	public bool Flee()
+	{
+		switch(Random.Range(0,4)){
+		case 0:
+			if(checkDown){
+				MoveDown();
+				canMove = true;
+				return true;
+			}else{
+				return false;
+			}
+			break;
+		case 1:
+			if(checkLeft){
+				MoveLeft();
+				canMove = true;
+				return true;
+			}else{
+				return false;
+			}
+			break;
+		case 2:
+			if(checkRight){
+				canMove = true;
+				MoveRight();
+				return true;
+			}else{
+				return false;
+			}
+			break;
+		case 3:
+			if(checkUp){
+				canMove = true;
+				MoveUp();
+				return true;
+			}else{
+				return false;
+			}
+			break;
+		}
+		return false;
 	}
 }
