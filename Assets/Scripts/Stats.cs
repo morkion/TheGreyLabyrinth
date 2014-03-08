@@ -65,4 +65,9 @@ public class Stats : MonoBehaviour
 		yield return new WaitForSeconds(3);
 		Application.LoadLevel(Application.loadedLevel);
 	}
+
+	public bool isDead()
+	{
+		return !callDeath;
+	}
 }
