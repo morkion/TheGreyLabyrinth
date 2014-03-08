@@ -7,6 +7,15 @@ public class Stats : MonoBehaviour
 	float health = 5;
 	float defence = 0;
 
+	bool callDeath = true;
+
+	Gamelog gamelog;
+
+	void Start()
+	{
+		gamelog = GetComponent<Gamelog>();
+	}
+
 	void OnGUI()
 	{
 		GUI.BeginGroup(new Rect(0, Screen.height - 50, 200, 50));
@@ -46,6 +55,14 @@ public class Stats : MonoBehaviour
 
 	void Update()
 	{
-		if(health<=0) Application.LoadLevel(Application.loadedLevel);
+		if(health <= 0 && callDeath) StartCoroutine("Death");
+	}
+
+	IEnumerator Death()
+	{
+		callDeath = false;
+		gamelog.AddLog("You have died.");
+		yield return new WaitForSeconds(3);
+		Application.LoadLevel(Application.loadedLevel);
 	}
 }

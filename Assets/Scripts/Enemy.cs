@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 
 	Stats stats;
 	Player player;
+	Gamelog gamelog;
 
 	bool shouldAttack = false;
 
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour
 		GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
 		stats = cam.GetComponent<Stats>();
 		player = cam.GetComponent<Player>();
+		gamelog = cam.GetComponent<Gamelog>();
 		startingAttack += Random.Range(-rndAttackModifier, rndAttackModifier);
 		startingHealth += Random.Range(-rndHealthModifier, rndHealthModifier);
 		startingDefence += Random.Range(-rndDefenceModifier, rndDefenceModifier);
@@ -36,10 +38,15 @@ public class Enemy : MonoBehaviour
 		if(health <= 0) Death();
 	}
 
+	void OnTriggerEnter(Collider col)
+	{
+		if(col.tag == "Player") gamelog.AddLog("Encountered an enemy.");
+	}
+
 	void OnTriggerStay(Collider col)
 	{
 		if(col.tag == "Player"){
-			shouldAttack = true;
+			shouldAttack = true;			
 			player.canMove = false;
 		}else{
 			//shouldAttack = false;
@@ -65,16 +72,22 @@ public class Enemy : MonoBehaviour
 				float mobDmg = stats.GetAttack()-defence;
 				if(mobDmg<0) mobDmg = 0;
 				health -= mobDmg;
+				gamelog.AddLog("You attack enemy for " + mobDmg + " damage.");
 
 				float plrDmg = attack - stats.GetDefence();
 				if(plrDmg<0) plrDmg = 0;
 				stats.ModifyHealth(-plrDmg);
+				gamelog.AddLog("Enemy attacks you for " + plrDmg + " damage.");
 			}
 			if(GUI.Button(new Rect(0, 150, 400, 50), "Flee")){
-				if(player.Flee() == false){ 
+				if(player.Flee() == false){
+					gamelog.AddLog("You failed to flee.");
 					float plrDmg = attack - stats.GetDefence();
 					if(plrDmg<0) plrDmg = 0;
 					stats.ModifyHealth(-plrDmg);
+					gamelog.AddLog("Enemy attacks you for " + plrDmg + " damage.");
+				}else{
+					gamelog.AddLog("You have fled from combat.");
 				}
 			}
 
@@ -85,6 +98,7 @@ public class Enemy : MonoBehaviour
 	void Death()
 	{
 		player.canMove = true;
+		gamelog.AddLog("Your enemy died.");
 		Destroy(gameObject);
 	}
 

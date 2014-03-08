@@ -7,10 +7,13 @@ public class Inventory : MonoBehaviour
 
 	Items itemScript;
 
+	Gamelog gamelog;
+
 	void Start()
 	{
 		items = new string[8];
 		itemScript = GetComponent<Items>();
+		gamelog = GetComponent<Gamelog>();
 	}
 
 	void Update()
@@ -21,12 +24,14 @@ public class Inventory : MonoBehaviour
 	public bool AddItem(string item)
 	{
 		for(int i = 0; i < items.Length; i++){
-			if(items[i]==null||items[i]==""){
+			if(items[i] == null || items[i] == ""){
 				items[i] = item;
+				gamelog.AddLog("You picked up " + items[i]);
 				return true;
 				break;
 			}
 		}
+		gamelog.AddLog("Inventory full.");
 		return false;
 	}
 
@@ -48,6 +53,7 @@ public class Inventory : MonoBehaviour
 			}
 			if(GUI.Button(new Rect(175, 25 + (25 * i), 25, 25), "X")){
 				DropItem(i);
+				gamelog.AddLog("You tossed " + items[i] + " away.");
 			}
 		}
 		GUI.EndGroup();

@@ -4,15 +4,20 @@ using System.Collections;
 public class Player : MonoBehaviour 
 {
 	Vector3 pos;
+
 	GenerateLevel gen;
+	Gamelog gamelog;
+
 	bool checkUp = false;
 	bool checkDown = false;
 	bool checkLeft = false;
 	bool checkRight = false;
 	public bool canMove = true;
+
 	void Start()
 	{
 		gen = GetComponent<GenerateLevel>();
+		gamelog = GetComponent<Gamelog>();
 	}
 
 	void Update()
@@ -55,12 +60,14 @@ public class Player : MonoBehaviour
 	{
 		if(Input.GetKeyUp(KeyCode.UpArrow) || !canMove){
 			transform.Translate(new Vector3(0, 0, 1), Space.World);
+			gamelog.AddLog("You moved up.");
 		}
 	}
 	void MoveDown()
 	{
 		if(Input.GetKeyUp(KeyCode.DownArrow) || !canMove){
 			transform.Translate(new Vector3(0, 0, -1), Space.World);
+			gamelog.AddLog("You moved down.");
 		}
 	}
 
@@ -68,6 +75,7 @@ public class Player : MonoBehaviour
 	{
 		if(Input.GetKeyUp(KeyCode.LeftArrow) || !canMove){
 			transform.Translate(new Vector3(-1, 0, 0),Space.World);
+			gamelog.AddLog("You moved left.");
 		}
 	}
 
@@ -75,6 +83,7 @@ public class Player : MonoBehaviour
 	{
 		if(Input.GetKeyUp(KeyCode.RightArrow) || !canMove){
 			transform.Translate(new Vector3(1, 0, 0),Space.World);
+			gamelog.AddLog("You moved right.");
 		}
 	}
 

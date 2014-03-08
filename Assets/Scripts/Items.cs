@@ -4,10 +4,12 @@ using System.Collections;
 public class Items : MonoBehaviour 
 {
 	Stats stats;
+	Gamelog gamelog;
 
 	void Start()
 	{
 		stats = GetComponent<Stats>();
+		gamelog = GetComponent<Gamelog>();
 	}
 
 	public bool UseItem(string item)
@@ -15,10 +17,12 @@ public class Items : MonoBehaviour
 		switch(GetType(item)){
 		case "Weapon":
 			ApplyPlayerAttack(GetWeaponAttack(item));
+			gamelog.AddLog("You equip " + item);
 			return true;
 			break;
 		case "Armour":
 			ApplyArmourDefense(GetArmourDefense(item));
+			gamelog.AddLog("You equip " + item);
 			return true;
 			break;
 		}
