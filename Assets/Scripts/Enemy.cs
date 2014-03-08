@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
 
 	void OnGUI()
 	{
-		if(shouldAttack&&!stats.isDead()){
+		if(shouldAttack && !stats.isDead()){
 			GUI.BeginGroup(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 200));
 
 			GUI.Box(new Rect(0, 0, 400, 200), "Encounter");

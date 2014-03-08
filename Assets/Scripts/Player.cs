@@ -110,8 +110,8 @@ public class Player : MonoBehaviour
 			break;
 		case 2:
 			if(checkRight){
-				canMove = true;
 				MoveRight();
+				canMove = true;
 				return true;
 			}else{
 				return false;
@@ -119,8 +119,8 @@ public class Player : MonoBehaviour
 			break;
 		case 3:
 			if(checkUp){
-				canMove = true;
 				MoveUp();
+				canMove = true;
 				return true;
 			}else{
 				return false;
