@@ -52,8 +52,8 @@ public class Inventory : MonoBehaviour
 				}
 			}
 			if(GUI.Button(new Rect(175, 25 + (25 * i), 25, 25), "X")){
-				DropItem(i);
 				gamelog.AddLog("You tossed " + items[i] + " away.");
+				DropItem(i);
 			}
 		}
 		GUI.EndGroup();
