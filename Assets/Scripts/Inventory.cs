@@ -4,9 +4,13 @@ using System.Collections;
 public class Inventory : MonoBehaviour 
 {
 	string[] items;
+
+	Items itemScript;
+
 	void Start()
 	{
 		items = new string[8];
+		itemScript = GetComponent<Items>();
 	}
 
 	void Update()
@@ -38,7 +42,9 @@ public class Inventory : MonoBehaviour
 		for(int i = 0; i < items.Length; i++){
 			GUI.Label(new Rect(0, 25 + (25 * i), 100, 25), items[i]);
 			if(GUI.Button(new Rect(100, 25 + (25 * i), 75, 25), "Use")){
-
+				if(itemScript.UseItem(items[i])){
+					DropItem(i);
+				}
 			}
 			if(GUI.Button(new Rect(175, 25 + (25 * i), 25, 25), "X")){
 				DropItem(i);
