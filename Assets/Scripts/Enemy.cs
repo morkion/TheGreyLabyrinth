@@ -78,6 +78,7 @@ public class Enemy : MonoBehaviour
 				if(plrDmg<0) plrDmg = 0;
 				stats.ModifyHealth(-plrDmg);
 				gamelog.AddLog("Enemy attacks you for " + plrDmg + " damage.");
+				Degrade();
 			}
 			if(GUI.Button(new Rect(0, 150, 400, 50), "Flee")){
 				if(player.Flee() == false){
@@ -100,6 +101,15 @@ public class Enemy : MonoBehaviour
 		player.canMove = true;
 		gamelog.AddLog("Your enemy died.");
 		Destroy(gameObject);
+	}
+
+	void Degrade()
+	{
+		attack -= Random.Range(0.001f,stats.GetDefence()/10);
+		defence -= Random.Range(0.001f,stats.GetAttack()/10);
+		if(attack <= 0) attack = 0;
+		if(defence <= 0) defence = 0;
+		stats.Degrade(attack, defence);
 	}
 
 }
