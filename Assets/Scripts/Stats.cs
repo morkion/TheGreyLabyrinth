@@ -56,6 +56,7 @@ public class Stats : MonoBehaviour
 	void Update()
 	{
 		if(health <= 0 && callDeath) StartCoroutine("Death");
+		if(health > 5) health = 5;
 	}
 
 	IEnumerator Death()

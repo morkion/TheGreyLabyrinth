@@ -25,6 +25,11 @@ public class Items : MonoBehaviour
 			gamelog.AddLog("You equip " + item);
 			return true;
 			break;
+		case "Food":
+			gamelog.AddLog("You consume " + item);
+			ApplyHealthModifer(GetHealthModifier(item));
+			return true;
+			break;
 		}
 		return false;
 	}
@@ -44,6 +49,11 @@ public class Items : MonoBehaviour
 		case "Steel Plate Armour":
 		case "Dwarven Steel Plate Armour":
 			return "Armour";
+			break;
+		case "Rotten Kiwi":
+		case "Healing Salve":
+		case "Healing Herb Mixture":
+			return "Food";
 			break;
 		}
 		return null;
@@ -87,6 +97,34 @@ public class Items : MonoBehaviour
 		return -1;
 	}
 
+	float GetHealthModifier(string foodItem)
+	{
+		switch(foodItem){
+		case "Rotten Kiwi":
+			float mod = Random.Range(-1,2);
+			if(mod==0){
+				gamelog.AddLog("Nothing happens.");
+				return 0;
+			}else if(mod==1){
+				gamelog.AddLog("You slightly better. +1 hp");
+				return 1;
+			}else{
+				gamelog.AddLog("You feel slightly worse. -1hp");
+				return -1;
+			}
+			break;
+		case "Healing Salve":
+			gamelog.AddLog("You feel a little better. +3hp");
+			return 3;
+			break;
+		case "Healing Herb Mixture":
+			gamelog.AddLog("You feel healthy.");
+			return 5;
+			break;
+		}
+		return 0;
+	}
+
 	void ApplyPlayerAttack(float attack)
 	{
 		stats.SetAttack(attack);
@@ -95,5 +133,10 @@ public class Items : MonoBehaviour
 	void ApplyArmourDefense(float defense)
 	{
 		stats.SetDefence(defense);
+	}
+
+	void ApplyHealthModifer(float modifier)
+	{
+		stats.ModifyHealth(modifier);
 	}
 }
