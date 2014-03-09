@@ -86,6 +86,7 @@ public class Enemy : MonoBehaviour
 					float plrDmg = attack - stats.GetDefence();
 					if(plrDmg<0) plrDmg = 0;
 					stats.ModifyHealth(-plrDmg);
+					PartialDegrade();
 					gamelog.AddLog("Enemy attacks you for " + plrDmg + " damage.");
 				}else{
 					gamelog.AddLog("You have fled from combat.");
@@ -110,6 +111,13 @@ public class Enemy : MonoBehaviour
 		if(attack <= 0) attack = 0;
 		if(defence <= 0) defence = 0;
 		stats.Degrade(attack, defence);
+	}
+
+	void PartialDegrade()
+	{
+		attack -= Random.Range(0.001f,stats.GetDefence()/10);
+		if(attack <= 0) attack = 0;
+		stats.PartialDegrade(attack);
 	}
 
 }

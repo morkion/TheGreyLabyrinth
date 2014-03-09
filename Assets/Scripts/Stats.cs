@@ -79,4 +79,10 @@ public class Stats : MonoBehaviour
 		if(attack <= 0) attack = 0;
 		if(defence <= 0) defence = 0;
 	}
+
+	public void PartialDegrade(float mobAttack)
+	{
+		defence -= Random.Range(0.001f, mobAttack/10);
+		if(defence <= 0) defence = 0;
+	}
 }
