@@ -12,11 +12,11 @@ public class Gamelog : MonoBehaviour
 
 	void OnGUI()
 	{
-		GUI.BeginGroup(new Rect(10, 10, 210, 10 + latestLogs.Length * 25));
+		GUI.BeginGroup(new Rect(10, 10, 310, 10 + latestLogs.Length * 25));
 
-		GUI.Box(new Rect(0, 0, 210, 10 + latestLogs.Length * 25), "Log");
+		GUI.Box(new Rect(0, 0, 310, 10 + latestLogs.Length * 25), "Log");
 		for(int i = 0; i < latestLogs.Length; i++){
-			GUI.Label(new Rect(0, 10 + i * 25, 200, 25), latestLogs[i]);
+			GUI.Label(new Rect(0, 10 + i * 25, 300, 25), latestLogs[i]);
 		}
 
 		GUI.EndGroup();

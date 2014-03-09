@@ -53,6 +53,7 @@ public class Items : MonoBehaviour
 		case "Rotten Kiwi":
 		case "Healing Salve":
 		case "Healing Herb Mixture":
+		case "Mysterious Pill":
 			return "Food";
 			break;
 		}
@@ -120,6 +121,19 @@ public class Items : MonoBehaviour
 		case "Healing Herb Mixture":
 			gamelog.AddLog("You feel healthy.");
 			return 5;
+			break;
+		case "Mysterious Pill":
+			float rnd = Random.Range(-1,2);
+			if(rnd == 0){
+				gamelog.AddLog("Nothing happens.");
+				return 0;
+			}else if(rnd == 1){
+				gamelog.AddLog("Food pill? +1 hp");
+				return 1;
+			}else{
+				gamelog.AddLog("It was cyanide...");
+				return -1337;
+			}
 			break;
 		}
 		return 0;
