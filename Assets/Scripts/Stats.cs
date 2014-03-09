@@ -21,7 +21,7 @@ public class Stats : MonoBehaviour
 		GUI.BeginGroup(new Rect(0, Screen.height - 50, 200, 50));
 
 		GUI.Box(new Rect(0, 0, 200, 50), "");
-		GUI.HorizontalScrollbar(new Rect(0, 0, 100, 25), 0, 5, 0, health);
+		GUI.HorizontalScrollbar(new Rect(0, 0, 100, 25), 0, health, 0, 5);
 		GUI.Label(new Rect(100, 0, 100, 25), " " + health + " Health");
 		GUI.Label(new Rect(0, 25, 200, 25), "Att: " + attack + " Def: " + defence);
 

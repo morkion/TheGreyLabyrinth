@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
 			GUI.BeginGroup(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 200));
 
 			GUI.Box(new Rect(0, 0, 400, 200), "Encounter");
-			GUI.HorizontalScrollbar(new Rect(0, 25, 200, 25), 0, startingHealth, 0, health);
+			GUI.HorizontalScrollbar(new Rect(0, 25, 200, 25), 0, health, 0, startingHealth);
 			GUI.Label(new Rect(200, 25, 200, 25)," " + health + " Health");
 			GUI.Label(new Rect(0, 50, 400, 25), "Att: " + attack + " Def:" + defence);
 			if(GUI.Button(new Rect(0, 100, 400, 50),"Attack")){
