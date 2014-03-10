@@ -7,6 +7,9 @@ public class Stats : MonoBehaviour
 	float health = 5;
 	float defence = 0;
 
+	int fragments = 0;
+	public int neededFragments = 7;
+
 	bool callDeath = true;
 
 	Gamelog gamelog;
@@ -18,12 +21,13 @@ public class Stats : MonoBehaviour
 
 	void OnGUI()
 	{
-		GUI.BeginGroup(new Rect(0, Screen.height - 50, 200, 50));
+		GUI.BeginGroup(new Rect(0, Screen.height - 75, 200, 75));
 
-		GUI.Box(new Rect(0, 0, 200, 50), "");
+		GUI.Box(new Rect(0, 0, 200, 75), "");
 		GUI.HorizontalScrollbar(new Rect(0, 0, 100, 25), 0, health, 0, 5);
 		GUI.Label(new Rect(100, 0, 100, 25), " " + health + " Health");
 		GUI.Label(new Rect(0, 25, 200, 25), "Att: " + attack + " Def: " + defence);
+		GUI.Label(new Rect(0, 50, 200, 25), "Fragments Found: " + fragments + "/" + neededFragments);
 
 		GUI.EndGroup();
 	}
@@ -57,6 +61,7 @@ public class Stats : MonoBehaviour
 	{
 		if(health <= 0 && callDeath) StartCoroutine("Death");
 		if(health > 5) health = 5;
+		if(fragments>=neededFragments) Application.LoadLevel(Application.loadedLevel + 1);
 	}
 
 	IEnumerator Death()
@@ -84,5 +89,10 @@ public class Stats : MonoBehaviour
 	{
 		defence -= Random.Range(0.001f, mobAttack/10);
 		if(defence <= 0) defence = 0;
+	}
+
+	public void FragmentFound()
+	{
+		fragments++;
 	}
 }

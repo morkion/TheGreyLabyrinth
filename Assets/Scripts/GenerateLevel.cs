@@ -8,6 +8,7 @@ public class GenerateLevel : MonoBehaviour
 	public GameObject cube;
 	public GameObject lootObj;
 	public GameObject enemyObj;
+	public GameObject fragmentObj;
 	GameObject clone;
 
 	public int size = 256;
@@ -37,7 +38,11 @@ public class GenerateLevel : MonoBehaviour
 	{
 		if(!cubeSpawned[Mathf.RoundToInt(x),Mathf.RoundToInt(z)]){
 			clone = Instantiate(cube, new Vector3(x, cubes[Mathf.RoundToInt(x), Mathf.RoundToInt(z)], z), Quaternion.identity) as GameObject;
-			if(Random.Range(0, 5) == 0 && cubes[Mathf.RoundToInt(x), Mathf.RoundToInt(z)] == 0) Instantiate(lootObj, new Vector3(x, 1, z), Quaternion.identity);
+			if(Random.Range(0, 5) == 0 && cubes[Mathf.RoundToInt(x), Mathf.RoundToInt(z)] == 0){ 
+				Instantiate(lootObj, new Vector3(x, 1, z), Quaternion.identity);
+			}else if(Random.Range(0, 50) == 0){
+				Instantiate(fragmentObj, new Vector3(x, 1, z), Quaternion.identity);
+			}
 			if(Random.Range(0, 5) == 0 && cubes[Mathf.RoundToInt(x), Mathf.RoundToInt(z)] == 0) Instantiate(enemyObj, new Vector3(x, 1, z), Quaternion.identity);
 			cubeSpawned[Mathf.RoundToInt(x), Mathf.RoundToInt(z)] = true;
 		}
