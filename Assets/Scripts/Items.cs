@@ -38,9 +38,14 @@ public class Items : MonoBehaviour
 	{
 		switch(item){
 		//Weapons
-		case "Longsword":
-		case "Sword":
-		case "Dagger":
+		case "Iron Longsword":
+		case "Iron Sword":
+		case "Iron Dagger":
+		case "Wooden Club":
+		case "Iron Mace":
+		case "Steel Sword":
+		case "Steel Greatsword":
+		case "Leather Whip":
 			return "Weapon";
 			break;
 		case "Clothing":
@@ -71,14 +76,29 @@ public class Items : MonoBehaviour
 	float GetWeaponAttack(string weapon)
 	{
 		switch(weapon){
-		case "Longsword":
-			return 2;
+		case "Iron Longsword":
+			return 1.65f;
 			break;
-		case "Sword":
-			return 1.5f;
+		case "Iron Sword":
+			return 1.3f;
 			break;
-		case "Dagger":
+		case "Iron Dagger":
 			return 1;
+			break;
+		case "Wooden Club":
+			return 0.25f;
+			break;
+		case "Iron Mace":
+			return 1.25f;
+			break;
+		case "Steel Sword":
+			return 1.9f;
+			break;
+		case "Steel Greatsword":
+			return 2.5f;
+			break;
+		case "Leather Whip":
+			return 0.5f;
 			break;
 		}
 		return -1;
