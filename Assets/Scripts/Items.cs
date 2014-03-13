@@ -213,7 +213,7 @@ public class Items : MonoBehaviour
 			return 4;
 			break;
 		case "Cake":
-			gamelog.AddLog("Cake is a lite. +0.001 hp");
+			gamelog.AddLog("Cake is a lie. +0.001 hp");
 			return 0.001f;
 			break;
 		case "Tube of Toothpaste":
