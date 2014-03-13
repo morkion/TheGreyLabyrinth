@@ -28,12 +28,12 @@ public class Player : MonoBehaviour
 		checkLeft = gen.GetCube(pos.x - 1, pos.z) == 0;
 		checkRight = gen.GetCube(pos.x + 1, pos.z) == 0;
 		int checks = gen.GetCube(pos.x, pos.z + 1) + gen.GetCube(pos.x, pos.z - 1) + gen.GetCube(pos.x - 1, pos.z) + gen.GetCube(pos.x + 1, pos.z);
+		if(checks >= 3){ 
+			gen.NoExit(pos.x, pos.z);
+		}else{
+			Spawning();
+		}
 		if(canMove){
-			if(checks >= 3){ 
-				gen.NoExit(pos.x, pos.z);
-			}else{
-				Spawning();
-			}
 			if(checks < 4 ) Movement();
 		}
 	}
