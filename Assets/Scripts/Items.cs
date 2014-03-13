@@ -54,6 +54,14 @@ public class Items : MonoBehaviour
 		case "Healing Salve":
 		case "Healing Herb Mixture":
 		case "Mysterious Pill":
+		case "Can of Carob Raisins":
+		case "Pack of Vanilla Mints":
+		case "Bottle of Rum":
+		case "Bottle of Mead":
+		case "Bandages":
+		case "First-Aid Kit":
+		case "Cake":
+		case "Tube of Toothpaste":
 			return "Food";
 			break;
 		}
@@ -134,6 +142,38 @@ public class Items : MonoBehaviour
 				gamelog.AddLog("It was cyanide...");
 				return -1337;
 			}
+			break;
+		case "Can of Carob Raisins":
+			gamelog.AddLog("You feel slightly better. +0.25 hp");
+			return 0.25f;
+			break;
+		case "Pack of Vanilla Mints":
+			gamelog.AddLog("You now have a nice vanilla breath.");
+			return 0;
+			break;
+		case "Bottle of Rum":
+			gamelog.AddLog("*Hicup* +0.5 hp");
+			return 0.5f;
+			break;
+		case "Bottle of Mead":
+			gamelog.AddLog("Mmmmm... +0.5 hp");
+			return 0.5f;
+			break;
+		case "Bandages":
+			gamelog.AddLog("You feel better. +2 hp");
+			return 2;
+			break;
+		case "First-Aid Kit":
+			gamelog.AddLog("You feel a lot better. +4 hp");
+			return 4;
+			break;
+		case "Cake":
+			gamelog.AddLog("Cake is a lite. +0.001 hp");
+			return 0.001f;
+			break;
+		case "Tube of Toothpaste":
+			gamelog.AddLog("Blistering white teeth!");
+			return 0;
 			break;
 		}
 		return 0;
