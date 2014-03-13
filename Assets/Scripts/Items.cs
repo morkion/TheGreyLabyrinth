@@ -50,9 +50,15 @@ public class Items : MonoBehaviour
 			break;
 		case "Clothing":
 		case "Leather Armour":
-		case "Chainmail Armour":
+		case "Iron Chainmail Armour":
 		case "Steel Plate Armour":
 		case "Dwarven Steel Plate Armour":
+		case "Elven Steel Armour":
+		case "A Bunch of Rags":
+		case "Iron Plate Armour":
+		case "Steel Chainmail Armour":
+		case "Old Robes":
+		case "Wooden Armour":
 			return "Armour";
 			break;
 		case "Rotten Kiwi":
@@ -113,7 +119,7 @@ public class Items : MonoBehaviour
 		case "Leather Armour":
 			return 1.5f;
 			break;
-		case "Chainmail Armour":
+		case "Iron Chainmail Armour":
 			return 2.5f;
 			break;
 		case "Steel Plate Armour":
@@ -122,6 +128,25 @@ public class Items : MonoBehaviour
 		case "Dwarven Steel Plate Armour":
 			return 7;
 			break;
+		case "Elven Steel Armour":
+			return 7;
+			break;
+		case "A Bunch of Rags":
+			return 0.01f;
+			break;
+		case "Iron Plate Armour":
+			return 3;
+			break;
+		case "Steel Chainmail Armour":
+			return 3.33f;
+			break;
+		case "Old Robes":
+			return 0.2f;
+			break;
+		case "Wooden Armour":
+			return 1;
+			break;
+
 		}
 		return -1;
 	}
