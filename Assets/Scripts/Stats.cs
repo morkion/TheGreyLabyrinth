@@ -94,5 +94,6 @@ public class Stats : MonoBehaviour
 	public void FragmentFound()
 	{
 		fragments++;
+		gamelog.AddLog("You have found a mystic fragment.");
 	}
 }
