@@ -40,19 +40,19 @@ public class Player : MonoBehaviour
 
 	void Movement()
 	{
-		if(checkUp){ 
+		if(checkUp && Input.GetKeyUp(KeyCode.UpArrow)){ 
 			MoveUp();
 		}
 
-		if(checkDown){
+		if(checkDown && Input.GetKeyUp(KeyCode.DownArrow)){
 			MoveDown();
 		}
 
-		if(checkLeft){
+		if(checkLeft && Input.GetKeyUp(KeyCode.LeftArrow)){
 			MoveLeft();
 		}
 
-		if(checkRight){ 
+		if(checkRight && Input.GetKeyUp(KeyCode.RightArrow)){ 
 			MoveRight();
 		}
 
@@ -68,33 +68,25 @@ public class Player : MonoBehaviour
 
 	void MoveUp()
 	{
-		if(Input.GetKeyUp(KeyCode.UpArrow) || !canMove){
-			transform.Translate(new Vector3(0, 0, 1), Space.World);
-			gamelog.AddLog("You moved up.");
-		}
+		transform.Translate(new Vector3(0, 0, 1), Space.World);
+		gamelog.AddLog("You moved up.");
 	}
 	void MoveDown()
 	{
-		if(Input.GetKeyUp(KeyCode.DownArrow) || !canMove){
-			transform.Translate(new Vector3(0, 0, -1), Space.World);
-			gamelog.AddLog("You moved down.");
-		}
+		transform.Translate(new Vector3(0, 0, -1), Space.World);
+		gamelog.AddLog("You moved down.");
 	}
 
 	void MoveLeft()
 	{
-		if(Input.GetKeyUp(KeyCode.LeftArrow) || !canMove){
-			transform.Translate(new Vector3(-1, 0, 0),Space.World);
-			gamelog.AddLog("You moved left.");
-		}
+		transform.Translate(new Vector3(-1, 0, 0),Space.World);
+		gamelog.AddLog("You moved left.");
 	}
 
 	void MoveRight()
 	{
-		if(Input.GetKeyUp(KeyCode.RightArrow) || !canMove){
-			transform.Translate(new Vector3(1, 0, 0),Space.World);
-			gamelog.AddLog("You moved right.");
-		}
+		transform.Translate(new Vector3(1, 0, 0),Space.World);
+		gamelog.AddLog("You moved right.");
 	}
 
 	public bool Flee()
@@ -138,5 +130,16 @@ public class Player : MonoBehaviour
 			break;
 		}
 		return false;
+	}
+	void OnGUI()
+	{
+		GUI.BeginGroup(new Rect(Screen.width / 2 - 50, Screen.height - 50, 100, 50));
+		if(canMove){
+			if(checkUp) if(GUI.Button(new Rect(100 / 3, 0, 100 / 3, 25), "/\\")) MoveUp();
+			if(checkLeft) if(GUI.Button(new Rect(0, 25, 100 / 3, 25), "<")) MoveLeft();
+			if(checkDown) if(GUI.Button(new Rect(100 / 3, 25, 100 / 3, 25), "\\/")) MoveDown();
+			if(checkRight) if(GUI.Button(new Rect(100 / 3 * 2, 25, 100 / 3, 25), ">")) MoveRight();
+		}
+		GUI.EndGroup();
 	}
 }

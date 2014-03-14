@@ -24,6 +24,7 @@ public class RandomLoot : MonoBehaviour
 	{
 		if(col.tag == "Player"){
 			showGui = true;
+			if(Input.GetKeyUp(KeyCode.E)) TakeLoot(GameObject.FindGameObjectWithTag("MainCamera"));
 		}else{
 			showGui = false;
 		}
@@ -41,7 +42,7 @@ public class RandomLoot : MonoBehaviour
 
 			GUI.Box(new Rect(0, 0, 200, 100), "Loot");
 			GUI.Label(new Rect(0, 25, 200, 25), chosenLoot);
-			if(GUI.Button(new Rect(0, 50, 200, 50), "Take")){
+			if(GUI.Button(new Rect(0, 50, 200, 50), "Take (E)")){
 				TakeLoot(GameObject.FindGameObjectWithTag("MainCamera"));
 			}
 

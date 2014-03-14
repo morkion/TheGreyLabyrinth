@@ -18,7 +18,8 @@ public class Inventory : MonoBehaviour
 
 	void Update()
 	{
-
+		if(Input.anyKey) UseInput(Input.inputString);
+		DestroyInput();
 	}
 
 	public bool AddItem(string item)
@@ -48,16 +49,46 @@ public class Inventory : MonoBehaviour
 			GUI.skin.label.alignment = TextAnchor.MiddleRight;
 			GUI.Label(new Rect(0, 25 + (25 * i), 190, 25), items[i]);
 			GUI.skin.label.alignment = TextAnchor.UpperLeft;
-			if(GUI.Button(new Rect(200, 25 + (25 * i), 75, 25), "Use")){
-				if(itemScript.UseItem(items[i])){
-					DropItem(i);
-				}
+			if(GUI.Button(new Rect(200, 25 + (25 * i), 55, 25), "Use(" + (i + 1) + ")")){
+				UseItem(i);
 			}
-			if(GUI.Button(new Rect(275, 25 + (25 * i), 25, 25), "X")){
-				gamelog.AddLog("You tossed " + items[i] + " away.");
-				DropItem(i);
+			if(GUI.Button(new Rect(255, 25 + (25 * i), 45, 25), "X(F" + (i + 1) + ")")){
+				DestroyItem(i);
 			}
 		}
 		GUI.EndGroup();
+	}
+
+	void UseInput(string input)
+	{
+		int outInt = 0;
+		int.TryParse(input, out outInt);
+		if(outInt >= 1 && outInt <= 8) UseItem(outInt - 1);
+		for(int f = 1; f <= 8; f++){
+			if(input == "f" + f.ToString()) DestroyItem(f-1);
+		}
+	}
+	void DestroyInput()
+	{
+		if(Input.GetKeyUp(KeyCode.F1)) DestroyItem(0);
+		if(Input.GetKeyUp(KeyCode.F2)) DestroyItem(1);
+		if(Input.GetKeyUp(KeyCode.F3)) DestroyItem(2);
+		if(Input.GetKeyUp(KeyCode.F4)) DestroyItem(3);
+		if(Input.GetKeyUp(KeyCode.F5)) DestroyItem(4);
+		if(Input.GetKeyUp(KeyCode.F6)) DestroyItem(5);
+		if(Input.GetKeyUp(KeyCode.F7)) DestroyItem(6);
+		if(Input.GetKeyUp(KeyCode.F8)) DestroyItem(7);
+	}
+
+	void UseItem(int slotnum)
+	{
+		if(itemScript.UseItem(items[slotnum])){
+			DropItem(slotnum);
+		}
+	}
+	void DestroyItem(int slotnum)
+	{
+		gamelog.AddLog("You tossed " + items[slotnum] + " away.");
+		DropItem(slotnum);
 	}
 }
